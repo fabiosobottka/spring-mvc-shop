@@ -25,3 +25,6 @@ hs_err_pid*
 /webstorebackend/target/
 /.metadata/
 /RemoteSystemsTempFiles
+/webstorebackend/*.classpath
+/webstorebackend/*.project
+/webstorebackend/.settings
