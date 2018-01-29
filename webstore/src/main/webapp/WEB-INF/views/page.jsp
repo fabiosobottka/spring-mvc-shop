@@ -44,27 +44,27 @@
 	<div class="wrapper">
 
 		<!-- Navigation -->
-		<%@ include file="./includes/navbar.jsp"%>
+		<%@include file="./includes/navbar.jsp"%>
 
 		<div class="content">
 
 			<!-- Home Content -->
 			<c:if test="${clickHome == true}">
-				<%@ include file="home.jsp"%>
+				<%@include file="home.jsp"%>
 			</c:if>
 
 			<c:if test="${clickAbout == true}">
-				<%@ include file="about.jsp"%>
+				<%@include file="about.jsp"%>
 			</c:if>
 
 			<c:if test="${clickContact == true}">
-				<%@ include file="contact.jsp"%>
+				<%@include file="contact.jsp"%>
 			</c:if>
 
 		</div>
 
 		<!-- Footer -->
-		<%@ include file="./includes/footer.jsp"%>
+		<%@include file="./includes/footer.jsp"%>
 
 		<!-- /.container -->
 
