@@ -49,5 +49,16 @@ public class CategoryDAOImpl extends GenericDAOImpl<Category, Integer> implement
 		
 		return categories;
 	}
+
+	@Override
+	public Category get(int id) {
+		
+		for(Category category : categories) {
+			if(category.getId() == id)
+				return category;
+		}
+		
+		return null;
+	}
 	
 }

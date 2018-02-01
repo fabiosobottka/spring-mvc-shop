@@ -25,5 +25,10 @@ public class CategoryBO {
 		
 		return categoryDAO.listar();
 	}
+	
+	public Category get(int id) {
+		
+		return categoryDAO.get(id);
+	}
 
 }

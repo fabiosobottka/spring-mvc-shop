@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import sobottka.springmvc.webstorebackend.bo.CategoryBO;
+import sobottka.springmvc.webstorebackend.dto.Category;
 
 
 @Controller
@@ -45,16 +45,23 @@ public class HomeController {
 	public ModelAndView showAllProducts() {
 		ModelAndView modelAndView = new ModelAndView("page");
 		modelAndView.addObject("title", "All products");
+		modelAndView.addObject("categories", categoryBO.listar());
 		modelAndView.addObject("clickAllProducts", true);
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/show/category/{id}/products")
+	@GetMapping(value = "/show/category/{id}/products")
 	public ModelAndView showCategoryProducts(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView("page");
 		
-		modelAndView.addObject("title", "All products");
-		modelAndView.addObject("clickAllProducts", true);
+		Category category = null;
+		category = categoryBO.get(id);
+		
+		modelAndView.addObject("title", category.getName());
+		modelAndView.addObject("categories", categoryBO.listar());
+		modelAndView.addObject("category", category);
+		
+		modelAndView.addObject("clickCategoryProducts", true);
 		return modelAndView;
 	}
 	
