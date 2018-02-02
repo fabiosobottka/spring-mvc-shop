@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface GenericDAO<E, I>  {
 	
-	void cadastrar(E entity);
-	void alterar(E entity);
+	void cadastrar(E entity) throws Exception;
+	void alterar(E entity) throws Exception;
 	void remover(I id) throws Exception;
-	E pesquisar(I id);
-	List<E> listar();
+	E pesquisar(I id) throws Exception;
+	List<E> listar() throws Exception;
 
 }

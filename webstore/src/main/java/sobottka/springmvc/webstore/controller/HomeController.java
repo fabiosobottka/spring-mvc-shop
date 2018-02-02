@@ -1,5 +1,7 @@
 package sobottka.springmvc.webstore.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +18,21 @@ public class HomeController {
 	@Autowired
 	private CategoryBO categoryBO;
 	
+	private List<Category> categories;
+	
 	@GetMapping(value = {"/", "/home", "/index"})
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView("page");
 		modelAndView.addObject("title", "Homepage");
-		modelAndView.addObject("categories", categoryBO.listar());
+		
+		try {
+			categories = categoryBO.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO redirect
+		}
+		
+		modelAndView.addObject("categories", categories);
 		modelAndView.addObject("clickHome", true);
 		return modelAndView;
 	}
@@ -29,6 +41,15 @@ public class HomeController {
 	public ModelAndView about() {
 		ModelAndView modelAndView = new ModelAndView("page");
 		modelAndView.addObject("title", "About us");
+		Category category = new Category();
+		category.setName("Television");
+		category.setDescription("This is a description for television!");
+		category.setImageURL("CAT_1.png");
+		try {
+			categoryBO.cadastrar(category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		modelAndView.addObject("clickAbout", true);
 		return modelAndView;
 	}
@@ -45,7 +66,15 @@ public class HomeController {
 	public ModelAndView showAllProducts() {
 		ModelAndView modelAndView = new ModelAndView("page");
 		modelAndView.addObject("title", "All products");
-		modelAndView.addObject("categories", categoryBO.listar());
+		
+		try {
+			categories = categoryBO.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO redirect
+		}
+		
+		modelAndView.addObject("categories", categories);
 		modelAndView.addObject("clickAllProducts", true);
 		return modelAndView;
 	}
@@ -55,10 +84,21 @@ public class HomeController {
 		ModelAndView modelAndView = new ModelAndView("page");
 		
 		Category category = null;
-		category = categoryBO.get(id);
+		try {
+			category = categoryBO.pesquisar(id);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			categories = categoryBO.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO redirect
+		}
 		
 		modelAndView.addObject("title", category.getName());
-		modelAndView.addObject("categories", categoryBO.listar());
+		modelAndView.addObject("categories", categories);
 		modelAndView.addObject("category", category);
 		
 		modelAndView.addObject("clickCategoryProducts", true);

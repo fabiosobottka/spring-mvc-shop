@@ -21,14 +21,33 @@ public class CategoryBO {
 	private CategoryDAO categoryDAO;
 	
 	
-	public List<Category> listar() {
+	public List<Category> listar() throws Exception {
 		
-		return categoryDAO.listar();
+		try {
+			return categoryDAO.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Erro ao listar as categorias do banco de dados!");
+		}
 	}
 	
-	public Category get(int id) {
+	public void cadastrar(Category category) throws Exception {
+		try {
+			categoryDAO.cadastrar(category);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Erro ao cadastrar categoria!");
+		}
+	}
+	
+	public Category pesquisar(int id) throws Exception {
 		
-		return categoryDAO.get(id);
+		try {
+			return categoryDAO.pesquisar(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Erro ao pesquisar categoria");
+		}
 	}
 
 }

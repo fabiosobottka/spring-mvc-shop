@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import sobottka.springmvc.webstorebackend.dao.GenericDAO;
 
 public class GenericDAOImpl<E, I> implements GenericDAO<E, I> {
@@ -22,15 +24,23 @@ public class GenericDAOImpl<E, I> implements GenericDAO<E, I> {
 	}
 
 	@Override
-	public void cadastrar(E entity) {
-		em.persist(entity);
-		// TODO HQL para cadastrar
+	@Transactional
+	public void cadastrar(E entity) throws Exception {
+		
+		try {
+			em.persist(entity);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
+		
+		
 	}
 
 	@Override
 	public void alterar(E entity) {
 		em.merge(entity);
-		// TODO HQL para alterar
+		
 	}
 
 	@Override
@@ -44,15 +54,21 @@ public class GenericDAOImpl<E, I> implements GenericDAO<E, I> {
 	}
 
 	@Override
-	public E pesquisar(I id) {
-		return em.find(clazz, id);
-		// TODO HQL para pesquisar
+	@Transactional
+	public E pesquisar(I id) throws Exception {
+		try {
+			return em.find(clazz, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
+		
 	}
 
 	@Override
+	@Transactional
 	public List<E> listar() {
-		System.out.println("Fabioooo3");
-		return em.createQuery("from" + clazz.getName(),clazz).getResultList();
+		return em.createQuery("from " + clazz.getName(),clazz).getResultList();
 		// TODO HQL para listar
 	}
 

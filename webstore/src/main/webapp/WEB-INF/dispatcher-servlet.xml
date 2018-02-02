@@ -26,6 +26,7 @@
 	<mvc:default-servlet-handler />
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="CLIENTE_MYSQL" />
 		<property name="dataSource" ref="mySQLDataSource" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
