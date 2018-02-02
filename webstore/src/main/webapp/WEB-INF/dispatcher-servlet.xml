@@ -43,7 +43,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/webstore" />
 		<property name="username" value="root" />
-		<property name="password" value="Fabeka731982465" />
+		<property name="password" value="password" />
 	</bean>
 	
 	<!-- Transactions -->
